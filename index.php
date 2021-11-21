@@ -44,7 +44,7 @@ require_once "broker_baze_podataka.php";
 
 
 <div class="container-lg">
-    <form action="">
+    <form action="" method="post">
         <div class="row row-cols-2 justify-content-between">
 
             <label for="ime">Ime</label>
@@ -60,45 +60,69 @@ require_once "broker_baze_podataka.php";
 
 
             <div class="col-md-6">
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" id="destinacija">
                     <option selected></option>
                     <?php
-                        $dbc = Broker::povezivanjeSaBazomPodataka();
-                        $rezultat = Broker::prikaziIzBaze(Destinacija::vratiImeKlase());
+                    $dbc = Broker::povezivanjeSaBazomPodataka();
+                    $rezultat = Broker::prikaziIzBaze(Destinacija::vratiImeKlase());
 
-                        while ($red = mysqli_fetch_array($rezultat)){
-                            $naziv = $red['naziv'];
-                            echo "<option value='1'>$naziv</option>";
-                        }
 
-                        Broker::zatvoriKonekciju($dbc);
-                        ?>
-<!--                    <option value="2">One</option>-->
-<!--                    <option value="3">Two</option>-->
-<!--                    <option value="4">Three</option>-->
+                    while ($red = mysqli_fetch_array($rezultat)){
+                        $naziv = $red['naziv'];
+                        echo "<option value='$naziv'>$naziv</option>";
+                    }
+
+                    Broker::zatvoriKonekciju($dbc);
+                    ?>
                 </select>
             </div>
             <div class="col-md-6">
                 <select class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected></option>
+                    <?php
+                    $dbc = Broker::povezivanjeSaBazomPodataka();
+                    $rezultat = Broker::prikaziIzBaze(AvioKompanija::vratiImeKlase());
+
+
+                    while ($red = mysqli_fetch_array($rezultat)){
+                        $naziv = $red['naziv'];
+                        echo "<option value='$naziv'>$naziv</option>";
+                    }
+                    Broker::zatvoriKonekciju($dbc);
+                    //                    <option value="1">One</option>
+                    ?>
                 </select>
             </div>
-
         </div>
     </form>
 </div>
 <?php
 
-    require_once "connect_vars.php";
-    echo "<h1>Projekat iteh!</h1>";
-    echo DB_HOST;
+require_once "connect_vars.php";
+echo "<h1>Projekat iteh!</h1>";
+echo DB_HOST;
 
 ?>
 
 
-
+<script>
+    // 'use strict';
+    // const destinacijaSelect = document.querySelector('#destinacija');
+    // console.log(destinacijaSelect);
+    // let destinacijaHidden;
+    //
+    //
+    // const promeniDestinacijaHidden = function(e){
+    //     destinacijaHidden = e.target.value;
+    //     console.log(destinacijaHidden);
+    // };
+    // destinacijaSelect.addEventListener('change',promeniDestinacijaHidden);
+    //
+    // const request = new XMLHttpRequest();
+    // request.open('GET',`index.php/${destinacijaHidden}`);
+    // // request.send(destinacijaHidden);
+    // request.send();
+</script>
+<script src="js-projekat/main.js"></script>
 </body>
 </html>
