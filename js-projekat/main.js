@@ -1,34 +1,81 @@
 'use strict';
 
 const selectDestinacija = document.querySelector('#destinacija');
-console.log(selectDestinacija);
+
+const selectAvio = document.querySelector('#avio');
 
 let selected = selectDestinacija[selectDestinacija.selectedIndex].value;
-console.log(selected);
 
-const onChangeDestinacija = function () {
-    selected = selectDestinacija[selectDestinacija.selectedIndex].value;
-    console.log(selected);
-    const avioKompanija = fetch('serverAvioKompanija.php').then(function (response) {
-        console.log(response);
-        return JSON.parse(response);
-    }).then(r=>console.log(r));
+// let avioKompanija={
+//     sifraAvioKompanija:0,
+//     naziv:""
+// };
+const arrayAvio = [];
 
-    // fetch("server.php").then(async response => {
-    //     try {
-    //         const data = await response.json()
-    //         console.log('response data?', data)
-    //     } catch(error) {
-    //         console.log('Error happened here!')
-    //         console.error(error)
-    //     }
-    // })
+// let destinacijaAvio={
+//     sifraDestinacija:0,
+//     sifraAvioKompanija:0
+// };
+const arrayDestinacijaAvio = [];
 
-    // const request = new XMLHttpRequest();
-    // request.open('GET', "server.php");
-    // request.send();
+let destinacija={
+    sifraDestinacija:0,
+    naziv:""
 };
 
+
+const onChangeDestinacija = function(){
+    // selected = selectDestinacija[selectDestinacija.selectedIndex].value;
+    console.log(`Prvi poziv: ${selected}`);
+    selectAvio.options.length = 0;
+
+
+    fetch("serverAvioKompanija.php").then(function(response){
+        return response.json();
+    }).then(function (arr) {
+        arrayAvio.length = 0;
+        for (let i =0;i<arr.length;i++){
+            arrayAvio.push(arr[i]);
+        }
+    });
+
+    fetch("serverDestinacijaAvioKompanija.php").then(response =>{
+        return response.json();
+    }).then(function (arr) {
+        arrayDestinacijaAvio.length = 0;
+        for (let i =0;i<arr.length;i++){
+            arrayDestinacijaAvio.push(arr[i]);
+        }
+    });
+
+    fetch("serverDestinacija.php").then(function (response) {
+        return response.json();
+    }).then(function (arr) {
+        selected = selectDestinacija[selectDestinacija.selectedIndex].value;
+        console.log(selected);
+        for (let i=0;i<arr.length;i++){
+            const {sifraDestinacija,naziv} = arr[i];
+            if(naziv===selected){
+                destinacija.sifraDestinacija = sifraDestinacija;
+                destinacija.naziv = naziv;
+                break;
+            }
+        }
+    }).then(()=>{
+        for (let i = 0; i < arrayDestinacijaAvio.length; i++) {
+            if(destinacija.sifraDestinacija===arrayDestinacijaAvio[i].sifraDestinacija){
+                for (let j = 0; j < arrayAvio.length; j++) {
+                    if(arrayDestinacijaAvio[i].sifraAvioKompanija===arrayAvio[j].sifraAvioKompanija){
+                        let option = document.createElement('option');
+                        option.appendChild(document.createTextNode(arrayAvio[j].naziv));
+                        option.value = arrayAvio[j].naziv;
+                        selectAvio.appendChild(option);
+                    }
+                }
+            }
+        }
+    });
+};
 
 selectDestinacija.addEventListener('change',onChangeDestinacija);
 
