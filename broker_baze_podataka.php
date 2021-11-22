@@ -19,7 +19,7 @@
 
 
         public static function vratiImeKlase(){
-            return "Destinacija";
+            return "destinacija";
         }
     }
 
@@ -40,11 +40,26 @@
         }
     }
 
+    class DestinacijaAvioKompanija{
+        var $sifraAvioKompanija;
+        var $sifraDestinacije;
+
+        public function __construct($sifraAvioKompanija, $sifraDestinacije)
+        {
+            $this->sifraAvioKompanija = $sifraAvioKompanija;
+            $this->sifraDestinacije = $sifraDestinacije;
+        }
+
+        public static function vratiImeKlase(){
+            return "Destinacija_AvioKompanija";
+        }
+    }
+
     class Broker{
 
 
         public static function povezivanjeSaBazomPodataka(){
-           $dbc  = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+            $dbc  = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
             return $dbc;
         }
 
@@ -53,6 +68,24 @@
             $dbc = self::povezivanjeSaBazomPodataka();
 
             $upit = "Select * From $imeKlase";
+            $rezultat = mysqli_query($dbc,$upit);
+
+            return $rezultat;
+        }
+
+        public static function prikaziIzBazeJSON($imeKlase){
+            $dbc = self::povezivanjeSaBazomPodataka();
+
+            $upit = "Select * From $imeKlase";
+            $rezultat = mysqli_query($dbc,$upit);
+
+            return json_encode($rezultat);
+        }
+
+        public static function prikaziIzBazeUslov($imeKlase, $uslov){
+            $dbc = self::povezivanjeSaBazomPodataka();
+
+            $upit = "Select * From $imeKlase Where sifra$imeKlase=$uslov";
             $rezultat = mysqli_query($dbc,$upit);
 
             return $rezultat;
