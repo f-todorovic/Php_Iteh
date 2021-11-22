@@ -60,6 +60,7 @@ require_once "broker_baze_podataka.php";
 
 
             <div class="col-md-6">
+                <label for="destinacija">Destinacija</label>
                 <select class="form-select" aria-label="Default select example" id="destinacija">
                     <option selected></option>
                     <?php
@@ -69,6 +70,7 @@ require_once "broker_baze_podataka.php";
 
                     while ($red = mysqli_fetch_array($rezultat)){
                         $naziv = $red['naziv'];
+                        $sifra = $red['sifraDestinacija'];
                         echo "<option value='$naziv'>$naziv</option>";
                     }
 
@@ -77,7 +79,8 @@ require_once "broker_baze_podataka.php";
                 </select>
             </div>
             <div class="col-md-6">
-                <select class="form-select" aria-label="Default select example">
+                <label for="avio">Avio kompanija</label>
+                <select class="form-select" aria-label="Default select example" id="avio">
                     <option selected></option>
                     <?php
                     $dbc = Broker::povezivanjeSaBazomPodataka();
@@ -98,31 +101,11 @@ require_once "broker_baze_podataka.php";
 </div>
 <?php
 
-require_once "connect_vars.php";
 echo "<h1>Projekat iteh!</h1>";
 echo DB_HOST;
 
 ?>
 
-
-<script>
-    // 'use strict';
-    // const destinacijaSelect = document.querySelector('#destinacija');
-    // console.log(destinacijaSelect);
-    // let destinacijaHidden;
-    //
-    //
-    // const promeniDestinacijaHidden = function(e){
-    //     destinacijaHidden = e.target.value;
-    //     console.log(destinacijaHidden);
-    // };
-    // destinacijaSelect.addEventListener('change',promeniDestinacijaHidden);
-    //
-    // const request = new XMLHttpRequest();
-    // request.open('GET',`index.php/${destinacijaHidden}`);
-    // // request.send(destinacijaHidden);
-    // request.send();
-</script>
 <script src="js-projekat/main.js"></script>
 </body>
 </html>
