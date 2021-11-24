@@ -100,7 +100,7 @@ require_once "broker_baze_podataka.php";
 
             </div>
             <div class="col-md-6 d-flex flex-row-reverse">
-                <button class="btn btn-primary align-self-end">Prijavi se</button>
+                <input class="btn btn-primary align-self-end" type="submit" id="prijavi_se">Prijavi se</input>
             </div>
         </div>
     </form>
