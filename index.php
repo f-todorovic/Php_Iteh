@@ -44,7 +44,7 @@ require_once "broker_baze_podataka.php";
 
 
 <div class="container-lg">
-    <form action="" method="post">
+    <form action="" method="post" name="prijava">
         <div class="row row-cols-2 justify-content-between">
 
             <label for="ime mb-1">Ime</label>
@@ -61,7 +61,7 @@ require_once "broker_baze_podataka.php";
 
             <div class="col-md-6 mb-4">
                 <label for="destinacija">Destinacija</label>
-                <select class="form-select" aria-label="Default select example" id="destinacija">
+                <select class="form-select" aria-label="Default select example" id="destinacija" name="destinacija">
                     <option selected></option>
                     <?php
                     $dbc = Broker::povezivanjeSaBazomPodataka();
@@ -71,7 +71,7 @@ require_once "broker_baze_podataka.php";
                     while ($red = mysqli_fetch_array($rezultat)){
                         $naziv = $red['naziv'];
                         $sifra = $red['sifraDestinacija'];
-                        echo "<option value='$naziv'>$naziv</option>";
+                        echo "<option value='$sifra' >$naziv</option>";
                     }
 
                     Broker::zatvoriKonekciju($dbc);
@@ -80,7 +80,7 @@ require_once "broker_baze_podataka.php";
             </div>
             <div class="col-md-6 mb-4">
                 <label for="avio">Avio kompanija</label>
-                <select class="form-select" aria-label="Default select example" id="avio">
+                <select class="form-select" aria-label="Default select example" id="avio" name="avio_kompanija">
                     <option selected></option>
                     <?php
                     $dbc = Broker::povezivanjeSaBazomPodataka();
@@ -89,7 +89,8 @@ require_once "broker_baze_podataka.php";
 
                     while ($red = mysqli_fetch_array($rezultat)){
                         $naziv = $red['naziv'];
-                        echo "<option value='$naziv'>$naziv</option>";
+                        $id = $red['sifraAvioKompanija'];
+                        echo "<option value='$id'>$naziv</option>";
                     }
                     Broker::zatvoriKonekciju($dbc);
                     //                    <option value="1">One</option>
@@ -100,7 +101,7 @@ require_once "broker_baze_podataka.php";
 
             </div>
             <div class="col-md-6 d-flex flex-row-reverse">
-                <input class="btn btn-primary align-self-end" type="submit" id="prijavi_se">Prijavi se</input>
+                <input class="btn btn-primary align-self-end" type="submit" id="prijavi_se" value="Prijavi se"/>
             </div>
         </div>
     </form>
