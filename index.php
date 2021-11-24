@@ -47,19 +47,19 @@ require_once "broker_baze_podataka.php";
     <form action="" method="post">
         <div class="row row-cols-2 justify-content-between">
 
-            <label for="ime">Ime</label>
+            <label for="ime mb-1">Ime</label>
 
-            <label for="prezime">Prezime</label>
+            <label for="prezime mb-1">Prezime</label>
 
-            <div class="col-md-6">
+            <div class="col-md-6 mb-2">
                 <input type="text" name="ime" id="ime">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mb-2">
                 <input type="text" name="prezime" id="prezime">
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-6 mb-2">
                 <label for="destinacija">Destinacija</label>
                 <select class="form-select" aria-label="Default select example" id="destinacija">
                     <option selected></option>
@@ -78,7 +78,7 @@ require_once "broker_baze_podataka.php";
                     ?>
                 </select>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mb-2">
                 <label for="avio">Avio kompanija</label>
                 <select class="form-select" aria-label="Default select example" id="avio">
                     <option selected></option>
@@ -95,6 +95,12 @@ require_once "broker_baze_podataka.php";
                     //                    <option value="1">One</option>
                     ?>
                 </select>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6 flex-row">
+                <button class="btn btn-primary align-self-end">Prijavi se</button>
             </div>
         </div>
     </form>
