@@ -93,7 +93,6 @@ require_once "broker_baze_podataka.php";
                         echo "<option value='$id'>$naziv</option>";
                     }
                     Broker::zatvoriKonekciju($dbc);
-                    //                    <option value="1">One</option>
                     ?>
                 </select>
             </div>
@@ -101,7 +100,7 @@ require_once "broker_baze_podataka.php";
 
             </div>
             <div class="col-md-6 d-flex flex-row-reverse">
-                <input class="btn btn-primary align-self-end" type="submit" id="prijavi_se" value="Prijavi se"/>
+                <input class="btn btn-primary align-self-end" type="submit" name="submit" value="Prijavi se"/>
             </div>
         </div>
     </form>
