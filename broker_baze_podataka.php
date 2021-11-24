@@ -55,6 +55,27 @@
         }
     }
 
+    class Putnik{
+        var $sifraPutnik;
+        var $ime;
+        var $prezime;
+        var $sifraDestinacija;
+        var $sifraAvioKompanija;
+
+        public function __construct($sifraPutnik, $ime, $prezime, $sifraDestinacija, $sifraAvioKompanija)
+        {
+            $this->sifraPutnik = $sifraPutnik;
+            $this->ime = $ime;
+            $this->prezime = $prezime;
+            $this->sifraDestinacija = $sifraDestinacija;
+            $this->sifraAvioKompanija = $sifraAvioKompanija;
+        }
+
+        public static function vratiImeKlase(){
+            return "Putnik";
+        }
+    }
+
     class Broker{
 
 
@@ -89,6 +110,14 @@
             $rezultat = mysqli_query($dbc,$upit);
 
             return $rezultat;
+        }
+
+        public static function ubaciUBazu($imeKlase,$ime,$prezime,$dest,$avioKomp){
+            $dbc = self::povezivanjeSaBazomPodataka();
+
+            $upit = "Insert Into $imeKlase (ime,prezime,sifraDestinacija,sifraAvioKompanija) Values ($ime,$prezime,$dest,$avioKomp)";
+
+            mysqli_query($dbc,$upit);
         }
 
         public static function zatvoriKonekciju($dbc){
