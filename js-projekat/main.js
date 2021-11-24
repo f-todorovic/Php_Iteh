@@ -55,7 +55,7 @@ const onChangeDestinacija = function(){
         console.log(selected);
         for (let i=0;i<arr.length;i++){
             const {sifraDestinacija,naziv} = arr[i];
-            if(sifraDestinacija==selected){
+            if(naziv==selected){
                 destinacija.sifraDestinacija = sifraDestinacija;
                 destinacija.naziv = naziv;
                 break;
