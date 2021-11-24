@@ -17,7 +17,7 @@ require_once "broker_baze_podataka.php";
 
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-lg-5">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Magna Air</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,7 @@ require_once "broker_baze_podataka.php";
             </div>
 
 
-            <div class="col-md-6 mb-2">
+            <div class="col-md-6 mb-4">
                 <label for="destinacija">Destinacija</label>
                 <select class="form-select" aria-label="Default select example" id="destinacija">
                     <option selected></option>
@@ -78,7 +78,7 @@ require_once "broker_baze_podataka.php";
                     ?>
                 </select>
             </div>
-            <div class="col-md-6 mb-2">
+            <div class="col-md-6 mb-4">
                 <label for="avio">Avio kompanija</label>
                 <select class="form-select" aria-label="Default select example" id="avio">
                     <option selected></option>
@@ -99,18 +99,12 @@ require_once "broker_baze_podataka.php";
             <div class="col-md-6">
 
             </div>
-            <div class="col-md-6 flex-row">
+            <div class="col-md-6 d-flex flex-row-reverse">
                 <button class="btn btn-primary align-self-end">Prijavi se</button>
             </div>
         </div>
     </form>
 </div>
-<?php
-
-echo "<h1>Projekat iteh!</h1>";
-echo DB_HOST;
-
-?>
 
 <script src="js-projekat/main.js"></script>
 </body>
