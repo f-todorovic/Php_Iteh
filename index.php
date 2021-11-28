@@ -100,12 +100,63 @@ require_once "broker_baze_podataka.php";
 
             </div>
             <div class="col-md-6 d-flex flex-row-reverse">
+                <input type="submit" class="btn btn-danger" name="submit" value="Obrisi"/>
+                <input type="submit" class="btn btn-secondary mx-2" name="submit" value="Izmeni">
                 <input class="btn btn-primary align-self-end" type="submit" name="submit" value="Prijavi se"/>
+
             </div>
         </div>
     </form>
 </div>
 
 <script src="js-projekat/main.js"></script>
+<?php
+
+if(isset($_POST['submit']) && $_POST['submit'] == "Prijavi se"){
+
+
+    $ime = $_POST['ime'];
+    $prezime = $_POST['prezime'];
+    $destinacija = $_POST['destinacija'];
+    $avioKomp = $_POST['avio_kompanija'];
+
+    $dbc = Broker::povezivanjeSaBazomPodataka();
+    Broker::ubaciUBazu(Putnik::vratiImeKlase(),$ime,$prezime,$destinacija,$avioKomp);
+    Broker::zatvoriKonekciju($dbc);
+    echo "<h1>Uspesno ste se prijavili za let!</h1>";
+    echo "<a class='btn btn-light' href='index.php'>Vrati se na pocetak</a>";
+}
+
+if(isset($_POST['submit']) && $_POST['submit'] == "Obrisi"){
+
+
+    $ime = $_POST['ime'];
+    $prezime = $_POST['prezime'];
+
+    $dbc = Broker::povezivanjeSaBazomPodataka();
+    Broker::izbaciIzBaze(Putnik::vratiImeKlase(),$ime,$prezime);
+    Broker::zatvoriKonekciju($dbc);
+    echo "<h1>Uspesno ste se obrisali prijavu leta!</h1>";
+    echo "<a class='btn btn-light' href='index.php'>Vrati se na pocetak</a>";
+}
+
+
+if(isset($_POST['submit']) && $_POST['submit'] == "Izmeni"){
+
+
+    $ime = $_POST['ime'];
+    $prezime = $_POST['prezime'];
+    $destinacija = $_POST['destinacija'];
+    $avioKomp = $_POST['avio_kompanija'];
+
+    $dbc = Broker::povezivanjeSaBazomPodataka();
+    Broker::azurirajBazu(Putnik::vratiImeKlase(),$ime,$prezime,$destinacija,$avioKomp);
+    Broker::zatvoriKonekciju($dbc);
+    echo "<h1>Uspesno ste se promenili prijavu leta!</h1>";
+    echo "<a class='btn btn-light' href='index.php'>Vrati se na pocetak</a>";
+}
+
+
+?>
 </body>
 </html>
