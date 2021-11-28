@@ -55,7 +55,7 @@ const onChangeDestinacija = function(){
         console.log(selected);
         for (let i=0;i<arr.length;i++){
             const {sifraDestinacija,naziv} = arr[i];
-            if(naziv==selected){
+            if(sifraDestinacija==selected){
                 destinacija.sifraDestinacija = sifraDestinacija;
                 destinacija.naziv = naziv;
                 break;
@@ -68,7 +68,7 @@ const onChangeDestinacija = function(){
                     if(arrayDestinacijaAvio[i].sifraAvioKompanija==arrayAvio[j].sifraAvioKompanija){
                         let option = document.createElement('option');
                         option.appendChild(document.createTextNode(arrayAvio[j].naziv));
-                        option.value = arrayAvio[j].naziv;
+                        option.value = arrayAvio[j].sifraAvioKompanija;
                         selectAvio.appendChild(option);
                     }
                 }
