@@ -117,27 +117,53 @@
 
             $upit = "Insert Into  $imeKlase (ime,prezime,sifraDestinacija,sifraAvioKompanija) Values ('$ime','$prezime',$dest,$avioKomp)";
 
-            if(mysqli_query($dbc,$upit)){
-                echo "Success";
-            }else{
-                echo "Error: " . $upit . "<br>" . mysqli_error($dbc);
-            }
+            mysqli_query($dbc,$upit);
         }
 
         public static function izbaciIzBaze($imeKlase,$ime,$prezime){
             $dbc = self::povezivanjeSaBazomPodataka();
 
-            $upit = "Delete From $imeKlase Where ime = '$ime' and prezime = '$prezime'";
+            $selectUpit = "Select ime,prezime From ".Putnik::vratiImeKlase();
+            $rez = mysqli_query($dbc,$selectUpit);
 
-            mysqli_query($dbc,$upit);
+            while ($red = mysqli_fetch_array($rez)){
+                $selectIme = $red['ime'];
+                $selectPrezime = $red['prezime'];
+                if($selectIme == $ime && $selectPrezime == $prezime){
+                    $upit = "Delete From $imeKlase Where ime = '$ime' and prezime = '$prezime'";
+                    mysqli_query($dbc,$upit);
+                    echo "<h1 class='row mx-5 mb-3'>Uspesno ste se izbrisali prijavu leta!</h1>";
+                    echo "<a class='row btn btn-light mx-5 mb-3' href='index.php'>Vrati se na pocetak</a>";
+                    return;
+                }
+            }
+
+            echo "<h1 class='row mx-5 mb-3'>Brisanje nije moguce, s'obzirom da se u bazi ne nalazi putnik sa zadatim kredencijalima!</h1>";
+            echo "<a class='row btn btn-light mx-5 mb-3' href='index.php'>Vrati se na pocetak</a>";
         }
 
         public static function azurirajBazu($imeKlase,$ime,$prezime,$dest,$avioKomp){
             $dbc = self::povezivanjeSaBazomPodataka();
 
-            $upit = "Update $imeKlase Set sifraDestinacija = $dest, sifraAvioKompanija = $avioKomp Where ime = '$ime' and prezime = '$prezime'";
+            $selectUpit = "Select ime,prezime From ".Putnik::vratiImeKlase();
+            $rez = mysqli_query($dbc,$selectUpit);
 
-            mysqli_query($dbc,$upit);
+            while ($red = mysqli_fetch_array($rez)){
+                $selectIme = $red['ime'];
+                $selectPrezime = $red['prezime'];
+                if($selectIme == $ime && $selectPrezime == $prezime){
+                    $upit = "Update $imeKlase Set sifraDestinacija = $dest, sifraAvioKompanija = $avioKomp Where ime = '$ime' and prezime = '$prezime'";
+                    mysqli_query($dbc,$upit);
+                    echo "<h1 class='row mx-5 mb-3'>Uspesno ste se promenili prijavu leta!</h1>";
+                    echo "<a class='row btn btn-light mx-5 mb-3' href='index.php'>Vrati se na pocetak</a>";
+                    return;
+                }
+            }
+
+
+            echo "<h1 class='row mx-5 mb-3'>Azuriranje nije moguce, s'obzirom da se u bazi ne nalazi putnik sa zadatim kredencijalima!</h1>";
+            echo "<a class='row btn btn-light mx-5 mb-3' href='index.php'>Vrati se na pocetak</a>";
+
         }
 
         public static function zatvoriKonekciju($dbc){
