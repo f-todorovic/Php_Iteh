@@ -44,7 +44,7 @@ require_once "broker_baze_podataka.php";
 
 
 <div class="container-lg">
-    <form action="" method="post" name="prijava">
+    <form class="p-3 border border-4 rounded rounded-2" action="" method="post" name="prijava">
         <div class="row row-cols-2 justify-content-between">
 
             <label for="ime mb-1">Ime</label>
@@ -52,10 +52,10 @@ require_once "broker_baze_podataka.php";
             <label for="prezime mb-1">Prezime</label>
 
             <div class="col-md-6 mb-2">
-                <input type="text" name="ime" id="ime">
+                <input class="border border-1 rounded-1 p-1 form-control" type="text" name="ime" id="ime" placeholder="Unesite svoje ime...">
             </div>
             <div class="col-md-6 mb-2">
-                <input type="text" name="prezime" id="prezime">
+                <input class="border border-1 rounded-1 p-1 form-control" type="text" name="prezime" id="prezime" placeholder="Unesite svoje prezime...">
             </div>
 
 
