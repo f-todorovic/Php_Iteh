@@ -44,7 +44,7 @@ require_once "broker_baze_podataka.php";
 
 
 <div class="container-lg">
-    <form class="p-3 border border-4 rounded rounded-2" action="" method="post" name="prijava">
+    <form class="p-3 border border-4 rounded rounded-2 my-3" action="" method="post" name="prijava">
         <div class="row row-cols-2 justify-content-between">
 
             <label for="ime mb-1">Ime</label>
@@ -123,8 +123,8 @@ if(isset($_POST['submit']) && $_POST['submit'] == "Prijavi se"){
     $dbc = Broker::povezivanjeSaBazomPodataka();
     Broker::ubaciUBazu(Putnik::vratiImeKlase(),$ime,$prezime,$destinacija,$avioKomp);
     Broker::zatvoriKonekciju($dbc);
-    echo "<h1>Uspesno ste se prijavili za let!</h1>";
-    echo "<a class='btn btn-light' href='index.php'>Vrati se na pocetak</a>";
+    echo "<h1 class='row mx-5 mb-3'>Uspesno ste se prijavili za let!</h1>";
+    echo "<a class='row btn btn-light mx-5 mb-3' href='index.php'>Vrati se na pocetak</a>";
 }
 
 if(isset($_POST['submit']) && $_POST['submit'] == "Obrisi"){
@@ -136,8 +136,6 @@ if(isset($_POST['submit']) && $_POST['submit'] == "Obrisi"){
     $dbc = Broker::povezivanjeSaBazomPodataka();
     Broker::izbaciIzBaze(Putnik::vratiImeKlase(),$ime,$prezime);
     Broker::zatvoriKonekciju($dbc);
-    echo "<h1>Uspesno ste se obrisali prijavu leta!</h1>";
-    echo "<a class='btn btn-light' href='index.php'>Vrati se na pocetak</a>";
 }
 
 
@@ -152,8 +150,6 @@ if(isset($_POST['submit']) && $_POST['submit'] == "Izmeni"){
     $dbc = Broker::povezivanjeSaBazomPodataka();
     Broker::azurirajBazu(Putnik::vratiImeKlase(),$ime,$prezime,$destinacija,$avioKomp);
     Broker::zatvoriKonekciju($dbc);
-    echo "<h1>Uspesno ste se promenili prijavu leta!</h1>";
-    echo "<a class='btn btn-light' href='index.php'>Vrati se na pocetak</a>";
 }
 
 
